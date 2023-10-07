@@ -10,7 +10,7 @@
     "test": "jest",
     "build": "tsc",
     "serve": "node ./build/server.js",
-    "dev": "ts-node ./src/server.ts"
+    "dev": "nodemon ./src/server.ts"
   },
   "name": "scofindo",
   "version": "1.0.0",
