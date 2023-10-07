@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 
 const register = async (req: Request, res: Response) => {
-    res.sendStatus(200);
+    const { username, password } = req.body;
 
 }
 
