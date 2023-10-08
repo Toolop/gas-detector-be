@@ -1,13 +1,13 @@
 import user from "../../../entities/user";
 
-export default function addUser(
+const addUser = (
   username: string,
   password: string,
   email: string,
   name: string,
   userRepository: any,
   authService: any
-) {
+) => {
   // TODO: add a proper validation (consider using @hapi/joi)
   if (!username || !password || !email) {
     throw new Error("username, password and email fields cannot be empty");
@@ -23,7 +23,6 @@ export default function addUser(
   return userRepository
     .findByProperty({ username })
     .then((userWithUsername: any) => {
-      console.log(typeof userWithUsername);
       if (userWithUsername.length) {
         throw new Error(`User with username: ${username} already exists`);
       }
@@ -36,4 +35,6 @@ export default function addUser(
       }
       return userRepository.add(newUser);
     });
-}
+};
+
+export default addUser;

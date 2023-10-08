@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import userController from "../../../controller/user/user";
+import authController from "../../../controller/auth/auth";
 import userRepository from "../../../domain/repository/user";
 import userDbRepository from "../../db/user/user";
 import authServiceInterface from "../../../domain/service/auth";
@@ -14,9 +15,14 @@ const controller = userController(
   authServiceImpl
 );
 
-router.post("/login", (req: Request, res: Response) =>
-  res.send("ini login.js")
+const auth = authController(
+  userRepository,
+  userDbRepository,
+  authServiceInterface,
+  authServiceImpl
 );
+
+router.post("/login", auth.login);
 
 router.post("/register", controller.addNewUser);
 
