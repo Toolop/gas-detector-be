@@ -2,10 +2,10 @@ import express from "express";
 import routes from "./routes/routes";
 const bodyParser = require("body-parser");
 const cors = require("cors");
+import port from "../../config/config";
 
 function expressServer() {
   const app = express();
-  const port = 8080;
 
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
