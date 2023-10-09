@@ -14,7 +14,7 @@ export default function userController(
       const { username, password, email, name } = req.body;
       addUser(username, password, email, name, dbRepository, authService)
         .then((user: any) => {
-          res.status(200);
+          res.status(201);
           res.json(user);
           next();
         })

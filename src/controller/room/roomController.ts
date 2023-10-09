@@ -12,9 +12,9 @@ export default function roomController(
       const { name } = req.body;
       const userid = req.token.user.id;
       addRoom(name, userid, dbRepository)
-        .then((user: any) => {
-          res.status(200);
-          res.json(user);
+        .then((room: any) => {
+          res.status(201);
+          res.json(room);
           next();
         })
         .catch((err: any) => {
@@ -34,9 +34,9 @@ export default function roomController(
     try {
       const userid = req.token.user.id;
       getRoomsByUserid(userid, dbRepository)
-        .then((user: any) => {
+        .then((room: any) => {
           res.status(200);
-          res.json(user);
+          res.json(room);
           next();
         })
         .catch((err: any) => {
