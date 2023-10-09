@@ -1,13 +1,17 @@
 import express from "express";
+import routes from "./routes/routes";
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 function expressServer() {
   const app = express();
   const port = 8080;
 
-  // endpoint sederhana untuk menampilkan teks 'Hello Express Node.js'
-  app.get("/", (req, res) => res.send("Hello Express Node.js"));
+  app.use(cors());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
-  // mulai server express
+  routes(app);
+
   app.listen(port, () => {
     console.log(`[server] server dimulai di http://localhost:${port} ⚡`);
   });

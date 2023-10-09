@@ -1,4 +1,3 @@
-import expressServer from "./infrastructure/express-server";
-
+import expressServer from "./infrastructure/webserver/express";
 
 expressServer();
