@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import userController from "../../../controller/user/user";
 import authController from "../../../controller/auth/auth";
 import userRepository from "../../../domain/repository/user";
