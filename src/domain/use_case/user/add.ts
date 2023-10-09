@@ -29,7 +29,6 @@ const addUser = (
       return userRepository.findByProperty({ email });
     })
     .then((userWithEmail: any) => {
-      console.log(userWithEmail);
       if (userWithEmail.length) {
         throw new Error(`User with email: ${email} already exists`);
       }

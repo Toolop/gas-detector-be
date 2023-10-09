@@ -9,17 +9,17 @@ import authServiceImpl from "../../service/authService";
 const router = express.Router();
 
 const controller = userController(
-  userRepository,
-  userDbRepository,
-  authServiceInterface,
-  authServiceImpl
+    userRepository,
+    userDbRepository,
+    authServiceInterface,
+    authServiceImpl
 );
 
 const auth = authController(
-  userRepository,
-  userDbRepository,
-  authServiceInterface,
-  authServiceImpl
+    userRepository,
+    userDbRepository,
+    authServiceInterface,
+    authServiceImpl
 );
 
 router.post("/login", auth.login);

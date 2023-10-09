@@ -9,6 +9,15 @@ export default function roomRepository() {
     });
   };
 
+  const addRelation = async (roomId: number, userId: number) => {
+    return await prisma.roomOnUser.create({
+      data: {
+        roomId: roomId,
+        userId: userId
+      },
+    });
+  };
+
   const findById = async (id: number) => {
     return await prisma.room.findFirst({
       where: {
@@ -19,6 +28,9 @@ export default function roomRepository() {
 
   const findByProperty = async (params: any) => {
     return await prisma.room.findMany({
+      include: {
+        RoomOnUser: true,
+      },
       where: params,
     });
   };
@@ -32,5 +44,6 @@ export default function roomRepository() {
     findAll,
     findById,
     findByProperty,
+    addRelation
   };
 }
