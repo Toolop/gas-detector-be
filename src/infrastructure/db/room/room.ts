@@ -13,7 +13,7 @@ export default function roomRepository() {
     return await prisma.roomOnUser.create({
       data: {
         roomId: roomId,
-        userId: userId
+        userId: userId,
       },
     });
   };
@@ -36,7 +36,11 @@ export default function roomRepository() {
   };
 
   const findAll = async () => {
-    return await prisma.room.findMany({});
+    return await prisma.room.findMany({
+      include: {
+        RoomOnUser: true,
+      },
+    });
   };
 
   return {
@@ -44,6 +48,6 @@ export default function roomRepository() {
     findAll,
     findById,
     findByProperty,
-    addRelation
+    addRelation,
   };
 }

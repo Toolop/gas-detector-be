@@ -29,7 +29,6 @@ export default function roomController(
     }
   };
 
-
   const getRooms = (req: any, res: any, next: any) => {
     try {
       const userid = req.token.user.id;
@@ -53,6 +52,6 @@ export default function roomController(
 
   return {
     addNewRoom,
-    getRooms
+    getRooms,
   };
 }

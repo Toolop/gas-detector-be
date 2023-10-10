@@ -9,16 +9,14 @@ const addRoom = (name: string, userid: number, repository: any) => {
   const newRoom = room(name);
 
   return repository.add(newRoom).then((room: any) => {
-
     if (!room.id) {
       throw new Error(`create room id failed to create`);
-    }
-    else {
-      const result = repository.addRelation(room.id, userid)
+    } else {
+      const result = repository.addRelation(room.id, userid);
       if (result) {
-        return room
+        return room;
       }
-      throw new Error(`room id failed to create`)
+      throw new Error(`room id failed to create`);
     }
     //return repository.addRoomUser(roomid, userid);
   });
