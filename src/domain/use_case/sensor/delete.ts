@@ -5,7 +5,7 @@ const deleteSensorUseCase = (sensorId: number, repository: any) => {
             if (Sensor === null) {
                 throw new Error(`sensor not found`);
             }
-            return repository.deleteRepo(sensorId, name);
+            return repository.deleteRepo(sensorId);
         });
 }
 

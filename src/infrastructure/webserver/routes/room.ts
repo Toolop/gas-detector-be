@@ -7,7 +7,7 @@ const router = express.Router();
 
 const controller = roomController(roomRepository, roomDbRepository);
 
-router.post("/", authMiddleware, controller.addNewRoom);
+router.post("/", controller.addNewRoom);
 
 router.get("/", authMiddleware);
 
