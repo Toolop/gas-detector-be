@@ -2,7 +2,6 @@ import getRoomsByUserid from "../../domain/use_case/room/getByUser";
 import addRoom from "../../domain/use_case/room/add";
 import updateRoom from "../../domain/use_case/room/update";
 import deleteRoom from './../../domain/use_case/room/delete';
-import { Console } from "console";
 export default function roomController(
   roomDbRepository: any,
   roomDbRepositoryImpl: any
@@ -11,9 +10,9 @@ export default function roomController(
 
   const addNewRoom = (req: any, res: any) => {
     try {
-      const { name } = req.body;
-      const userid = req.token.user.id;
-      addRoom(name, userid, dbRepository)
+      const { name, userId } = req.body;
+      //const userid = req.token.user.id;
+      addRoom(name, parseInt(userId), dbRepository)
         .then((room: any) => {
           res.status(201);
           res.json(room);
@@ -30,8 +29,9 @@ export default function roomController(
 
   const getRooms = (req: any, res: any) => {
     try {
-      const userid = req.token.user.id;
-      getRoomsByUserid(userid, dbRepository)
+      const userId: number = parseInt(req.query.userId);
+      //const userid = req.token.user.id;
+      getRoomsByUserid(userId, dbRepository)
         .then((room: any) => {
           res.status(200);
           res.json(room);
@@ -82,7 +82,7 @@ export default function roomController(
       res.send(`${err}`);
     }
   }
-    
+
 
   return {
     addNewRoom,

@@ -23,17 +23,14 @@ export default function sensorController(
         .then((room: any) => {
           res.status(201);
           res.json(room);
-          next();
         })
         .catch((err: any) => {
           res.status(400);
           res.send(`${err}`);
-          next();
         });
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   };
   const getSensorByRoomId = (req: any, res: any, next: any) => {
@@ -43,17 +40,14 @@ export default function sensorController(
         .then((sensor: any) => {
           res.status(200);
           res.json(sensor);
-          next();
         })
         .catch((err: any) => {
           res.status(400);
           res.send(`${err}`);
-          next();
         });
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   };
   const getSensorByIdSensor = (req: any, res: any, next: any) => {
@@ -63,17 +57,14 @@ export default function sensorController(
         .then((sensor: any) => {
           res.status(200);
           res.json(sensor);
-          next();
         })
         .catch((err: any) => {
           res.status(404);
           res.send(`${err}`);
-          next();
         });
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   };
 
@@ -85,17 +76,14 @@ export default function sensorController(
         .then((sensor: any) => {
           res.status(201);
           res.send("update successfully");
-          next();
         })
         .catch((err: any) => {
           res.status(404);
           res.send(`${err}`);
-          next();
         });
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   }
 
@@ -103,21 +91,18 @@ export default function sensorController(
     try {
       const sensorId = parseInt(req.params["id"]);
       deleteSensorUseCase(sensorId, dbRepository)
-        .then((sensor: any) => {
+        .then(() => {
           res.status(200);
           res.send("delete successfully");
-          next();
         })
         .catch((err: any) => {
           res.status(404);
           res.send(`${err}`);
-          next();
         });
 
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   }
 

@@ -7,14 +7,14 @@ const router = express.Router();
 
 const controller = sensorController(sensorRepository, sensorDbRepository);
 
-router.post("/", authMiddleware, controller.addNewSensor);
+router.post("/", controller.addNewSensor);
 
-router.get("/", authMiddleware, controller.getSensorByRoomId);
+router.get("/", controller.getSensorByRoomId);
 
-router.get("/:id", authMiddleware, controller.getSensorByIdSensor);
+router.get("/:id", controller.getSensorByIdSensor);
 
-router.put("/:id", authMiddleware, controller.updateSensorByIdSensor);
+router.put("/:id", controller.updateSensorByIdSensor);
 
-router.delete("/:id", authMiddleware, controller.deleteController);
+router.delete("/:id", controller.deleteController);
 
 export default router;

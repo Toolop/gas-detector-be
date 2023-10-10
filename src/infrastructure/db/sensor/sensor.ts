@@ -38,14 +38,12 @@ export default function sensorRepository() {
   }
 
   const deleteSensor = async (id: number) => {
-    return await prisma.user.delete({
+    return await prisma.sensor.delete({
       where: {
         id: id,
       },
     })
   }
-
-
 
   const findAllById = async (id: number) => {
     return await prisma.sensor.findMany({
