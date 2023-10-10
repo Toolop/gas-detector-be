@@ -13,9 +13,7 @@ function expressServer() {
   routes(app);
 
   app.listen(config.port, () => {
-    console.log(
-      `[server] server dimulai di http://localhost:${config.port} ⚡`
-    );
+    console.log(`[server] server dimulai di http://localhost:${config.port} ⚡`);
   });
 }
 
