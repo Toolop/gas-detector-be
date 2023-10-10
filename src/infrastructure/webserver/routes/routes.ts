@@ -6,6 +6,7 @@ const routes = (app: any) => {
   app.use("/api/v1", user);
   app.use("/api/v1/rooms", room);
   app.use("/api/v1/sensors", sensor);
+  app.use("/api/v1/valueSensors", sensor);
   app.use((req: any, res: any, next: any) => {
     res.status(404).json({
       message: '404 not found'
