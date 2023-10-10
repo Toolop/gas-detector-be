@@ -5,7 +5,7 @@ export default function RoomRepository(repository: any) {
   const findById = (id: any) => repository.findById(id);
   const add = (Room: any) => repository.add(Room);
   const deleteById = (id: number) => repository.deleteById(id);
-
+  const updateById = (id: number, name: string) => repository.updateById(id, name);
   return {
     findByProperty,
     countAll,
@@ -13,5 +13,6 @@ export default function RoomRepository(repository: any) {
     add,
     addRelation,
     deleteById,
+    updateById
   };
 }

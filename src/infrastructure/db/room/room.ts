@@ -43,11 +43,19 @@ export default function roomRepository() {
     });
   };
 
+  const updateById = async (id: number,name:string) => {
+    return await prisma.room.update({
+      where: { id: id },
+      data: { name: name },
+    });
+  }
+
   return {
     add,
     findAll,
     findById,
     findByProperty,
     addRelation,
+    updateById,
   };
 }
