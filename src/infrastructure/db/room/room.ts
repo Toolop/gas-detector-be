@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import deleteRoom from "src/domain/use_case/room/delete";
 
 const prisma = new PrismaClient({});
 
@@ -35,6 +36,16 @@ export default function roomRepository() {
     });
   };
 
+  const findByPropertyRelation = async (params: any) => {
+    return await prisma.room.findMany({
+      include: {
+        RoomOnUser: {
+          where: params,
+        }
+      },
+    });
+  }
+
   const findAll = async () => {
     return await prisma.room.findMany({
       include: {
@@ -50,6 +61,18 @@ export default function roomRepository() {
     });
   }
 
+  const deleteById = async (id: number) => {
+    return await prisma.roomOnUser.deleteMany({
+      where: { roomId: id }
+    }).then(() => {
+      return prisma.room.delete({
+        where: { id: id },
+      });
+    });
+  }
+
+
+
   return {
     add,
     findAll,
@@ -57,5 +80,7 @@ export default function roomRepository() {
     findByProperty,
     addRelation,
     updateById,
+    deleteById,
+    findByPropertyRelation
   };
 }

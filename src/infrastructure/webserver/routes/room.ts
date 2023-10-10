@@ -13,6 +13,6 @@ router.get("/", authMiddleware, controller.getRooms);
 
 router.put("/:id", authMiddleware, controller.updateRoomControl );
 
-router.delete("/", authMiddleware);
+router.delete("/:id", authMiddleware, controller.deleteRoomControl);
 
 export default router;

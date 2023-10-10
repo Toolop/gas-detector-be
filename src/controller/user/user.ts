@@ -9,35 +9,30 @@ export default function userController(
   const dbRepository = userDbRepository(userDbRepositoryImpl());
   const authService = authServiceInterface(authServiceImpl());
 
-  const addNewUser = (req: any, res: any, next: any) => {
+  const addNewUser = (req: any, res: any) => {
     try {
       const { username, password, email, name } = req.body;
       addUser(username, password, email, name, dbRepository, authService)
         .then((user: any) => {
           res.status(201);
           res.json(user);
-          next();
         })
         .catch((err: any) => {
           res.status(400);
           res.send(`${err}`);
-          next();
         });
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
-      next();
     }
   };
-  const getUserByNumberId = async (req: any, res: any, next: any) => {
+  const getUserByNumberId = async (req: any, res: any) => {
     try {
       const { id } = req.params;
       const user = await getUserById(parseInt(id), dbRepository, authService);
       res.status(200).json(user); 
-      next();
     } catch (err) {
       res.status(400).send(`${err}`);
-      next();
     }
   };
 
