@@ -2,19 +2,25 @@ export default function sensorRepository(repository: any) {
   const findByProperty = (params: any) => repository.findByProperty(params);
   const addRelation = (id: number, idRelation: number) =>
     repository.addRelation(id, idRelation);
-  const findAllByIdRoom = (id: number) => repository.findAllByIdRoom(id);
+  const checkRoomRepo = (id: number) => repository.checkRoom(id);
+  const checkSensorTypeRepo = (id: number) => repository.checkSensorType(id);
+  const findAllById = (id: number) => repository.findAllById(id);
   const findById = (id: any) => repository.findById(id);
   const add = (sensor: any) => repository.add(sensor);
-  const deleteById = (id: number) => repository.deleteById(id);
+  const deleteRepo = (id: number) => repository.deleteSensor(id);
   const findAll = () => repository.findAll();
+  const updateRepo = (id: number, data: any) => { repository.update(id, data) }
 
   return {
     findByProperty,
-    findAllByIdRoom,
+    findAllById,
     findById,
     add,
+    checkSensorTypeRepo,
+    checkRoomRepo,
     addRelation,
-    deleteById,
+    deleteRepo,
     findAll,
+    updateRepo
   };
 }

@@ -1,6 +1,8 @@
 import addSensor from "../../domain/use_case/sensor/add";
 import getSensors from "../../domain/use_case/sensor/getById";
+import updateSensor from "../../domain/use_case/sensor/update";
 import getSensorDetail from "../../domain/use_case/sensor/getDetail";
+import deleteSensorUseCase from "../../domain/use_case/sensor/delete"
 
 export default function sensorController(
   DbRepository: any,
@@ -64,7 +66,7 @@ export default function sensorController(
           next();
         })
         .catch((err: any) => {
-          res.status(400);
+          res.status(404);
           res.send(`${err}`);
           next();
         });
@@ -75,9 +77,55 @@ export default function sensorController(
     }
   };
 
+  const updateSensorByIdSensor = (req: any, res: any, next: any) => {
+    try {
+      const sensorId = parseInt(req.params["id"]);
+      const { name } = req.body;
+      updateSensor(sensorId, name, dbRepository)
+        .then((sensor: any) => {
+          res.status(201);
+          res.send("update successfully");
+          next();
+        })
+        .catch((err: any) => {
+          res.status(404);
+          res.send(`${err}`);
+          next();
+        });
+    } catch (err) {
+      res.status(400);
+      res.send(`${err}`);
+      next();
+    }
+  }
+
+  const deleteController = (req: any, res: any, next: any) => {
+    try {
+      const sensorId = parseInt(req.params["id"]);
+      deleteSensorUseCase(sensorId, dbRepository)
+        .then((sensor: any) => {
+          res.status(200);
+          res.send("delete successfully");
+          next();
+        })
+        .catch((err: any) => {
+          res.status(404);
+          res.send(`${err}`);
+          next();
+        });
+
+    } catch (err) {
+      res.status(400);
+      res.send(`${err}`);
+      next();
+    }
+  }
+
   return {
     addNewSensor,
     getSensorByRoomId,
     getSensorByIdSensor,
+    updateSensorByIdSensor,
+    deleteController
   };
 }

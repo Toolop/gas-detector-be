@@ -12,9 +12,26 @@ const addSensor = (
     throw new Error("Sensor name cannot be empty");
   }
 
-  const newSensor = sensor(name, calibration, sensorTypeId, roomId);
+  const newSensor = sensor(
+    name,
+    calibration,
+    sensorTypeId,
+    roomId,
+  );
 
-  return repository.add(newSensor);
+  return repository.checkRoomRepo(roomId).then(
+    (room: any) => {
+      if (!room.length) {
+        throw new Error(`room Id not Found`);
+      }
+      return repository.checkSensorTypeRepo(sensorTypeId);
+    }).then((typeSensor: any) => {
+      if (typeSensor === null) {
+        throw new Error(`sensor type id not Found`);
+      }
+      return repository.add(newSensor);
+    })
+
 };
 
 export default addSensor;
