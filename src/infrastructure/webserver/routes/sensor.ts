@@ -9,9 +9,9 @@ const controller = sensorController(sensorRepository, sensorDbRepository);
 
 router.post("/", authMiddleware, controller.addNewSensor);
 
-router.get("/", authMiddleware);
+router.get("/", authMiddleware, controller.getSensorByRoomId);
 
-router.put("/", authMiddleware);
+router.get("/:id", authMiddleware, controller.getSensorByIdSensor);
 
 router.delete("/", authMiddleware);
 

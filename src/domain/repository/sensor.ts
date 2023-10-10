@@ -6,6 +6,7 @@ export default function sensorRepository(repository: any) {
   const findById = (id: any) => repository.findById(id);
   const add = (sensor: any) => repository.add(sensor);
   const deleteById = (id: number) => repository.deleteById(id);
+  const findAll = () => repository.findAll();
 
   return {
     findByProperty,
@@ -14,5 +15,6 @@ export default function sensorRepository(repository: any) {
     add,
     addRelation,
     deleteById,
+    findAll,
   };
 }

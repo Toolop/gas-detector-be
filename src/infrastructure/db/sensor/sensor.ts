@@ -37,10 +37,19 @@ export default function sensorRepository() {
     });
   };
 
+  const findAll = async () => {
+    return await prisma.sensor.findMany({
+      include: {
+        SensorType: true,
+      },
+    });
+  };
+
   return {
     add,
     findAllByIdRoom,
     findById,
     findByProperty,
+    findAll,
   };
 }
