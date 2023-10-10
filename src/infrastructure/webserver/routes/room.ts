@@ -9,10 +9,10 @@ const controller = roomController(roomRepository, roomDbRepository);
 
 router.post("/", controller.addNewRoom);
 
-router.get("/", authMiddleware, controller.getRooms);
+router.get("/", controller.getRooms);
 
-router.put("/:id", authMiddleware, controller.updateRoomControl );
+router.put("/:id", controller.updateRoomControl);
 
-router.delete("/:id", authMiddleware, controller.deleteRoomControl);
+router.delete("/:id", controller.deleteRoomControl);
 
 export default router;
