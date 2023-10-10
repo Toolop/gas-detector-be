@@ -19,11 +19,14 @@ const auth = authController(
     userRepository,
     userDbRepository,
     authServiceInterface,
-    authServiceImpl
+    authServiceImpl,
+    
 );
 
 router.post("/login", auth.login);
 
 router.post("/register", controller.addNewUser);
+
+router.get("/user/:id", controller.getUserByNumberId);
 
 export default router;

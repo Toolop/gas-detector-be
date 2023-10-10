@@ -1,5 +1,5 @@
 import addUser from "../../domain/use_case/user/add";
-
+import getUserById from './../../domain/use_case/user/get';
 export default function userController(
   userDbRepository: any,
   userDbRepositoryImpl: any,
@@ -29,8 +29,20 @@ export default function userController(
       next();
     }
   };
+  const getUserByNumberId = async (req: any, res: any, next: any) => {
+    try {
+      const { id } = req.params;
+      const user = await getUserById(parseInt(id), dbRepository, authService);
+      res.status(200).json(user); 
+      next();
+    } catch (err) {
+      res.status(400).send(`${err}`);
+      next();
+    }
+  };
 
   return {
     addNewUser,
+    getUserByNumberId,
   };
 }

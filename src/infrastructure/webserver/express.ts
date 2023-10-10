@@ -2,7 +2,7 @@ import express from "express";
 import routes from "./routes/routes";
 const bodyParser = require("body-parser");
 const cors = require("cors");
-import port from "../../config/config";
+import config from "../../config/config";
 
 function expressServer() {
   const app = express();
@@ -12,8 +12,8 @@ function expressServer() {
 
   routes(app);
 
-  app.listen(port, () => {
-    console.log(`[server] server dimulai di http://localhost:${port} ⚡`);
+  app.listen(config.port, () => {
+    console.log(`[server] server dimulai di http://localhost:${config.port} ⚡`);
   });
 }
 
