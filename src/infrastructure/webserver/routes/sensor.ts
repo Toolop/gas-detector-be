@@ -13,6 +13,8 @@ router.get("/", authMiddleware, controller.getSensorByRoomId);
 
 router.get("/:id", authMiddleware, controller.getSensorByIdSensor);
 
-router.delete("/", authMiddleware);
+router.put("/:id", authMiddleware, controller.updateSensorByIdSensor);
+
+router.delete("/:id", authMiddleware, controller.deleteController);
 
 export default router;

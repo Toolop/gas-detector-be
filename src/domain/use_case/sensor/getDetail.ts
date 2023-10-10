@@ -1,8 +1,10 @@
 const getSensorDetail = (sensorId: number, repository: any) => {
-  if (sensorId) {
-    return repository.findById(sensorId);
-  }
-  throw new Error("need Sensor Id");
+  return repository.findById(sensorId).then((sensor: any) => {
+    if (sensor != null) {
+      return sensor
+    }
+    throw new Error("sensor not found")
+  })
 };
 
 export default getSensorDetail;

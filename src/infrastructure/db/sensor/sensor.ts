@@ -26,7 +26,28 @@ export default function sensorRepository() {
     });
   };
 
-  const findAllByIdRoom = async (id: number) => {
+  const update = async (id: number, name: string) => {
+    return await prisma.sensor.update({
+      where: {
+        id: id
+      },
+      data: {
+        name: name
+      }
+    })
+  }
+
+  const deleteSensor = async (id: number) => {
+    return await prisma.user.delete({
+      where: {
+        id: id,
+      },
+    })
+  }
+
+
+
+  const findAllById = async (id: number) => {
     return await prisma.sensor.findMany({
       include: {
         SensorType: true,
@@ -45,11 +66,30 @@ export default function sensorRepository() {
     });
   };
 
+  const checkRoom = async (id: number) => {
+    return await prisma.room.findMany({
+      where: {
+        id: id,
+      }
+    });
+  }
+  const checkSensorType = async (id: number) => {
+    return await prisma.sensorType.findFirst({
+      where: {
+        id: id
+      }
+    })
+  }
+
   return {
     add,
-    findAllByIdRoom,
+    findAllById,
     findById,
     findByProperty,
+    update,
     findAll,
+    deleteSensor,
+    checkRoom,
+    checkSensorType,
   };
 }
