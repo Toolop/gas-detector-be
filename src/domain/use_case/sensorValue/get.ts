@@ -1,7 +1,7 @@
 const getSensorValueUseCase = (
     sensorId: number, repository: any
 ) => {
-    return repository.getById(sensorId)
+    return repository.getLastByIdRepo(sensorId)
 };
 
 export default getSensorValueUseCase;

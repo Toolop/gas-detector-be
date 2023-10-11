@@ -82,16 +82,31 @@ CREATE TABLE "SensorValue" (
 -- CreateTable
 CREATE TABLE "Condition" (
     "id" SERIAL NOT NULL,
-    "set_point" INTEGER NOT NULL,
-    "type" INTEGER NOT NULL,
+    "upperDanger" INTEGER NOT NULL,
+    "upperWarning" INTEGER NOT NULL,
+    "lowerDanger" INTEGER NOT NULL,
+    "lowerWarning" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
+    "sensorId" INTEGER,
 
     CONSTRAINT "Condition_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_RoomToSensor" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_RoomToSensor_AB_unique" ON "_RoomToSensor"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_RoomToSensor_B_index" ON "_RoomToSensor"("B");
 
 -- AddForeignKey
 ALTER TABLE "RolesOnUser" ADD CONSTRAINT "RolesOnUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -110,3 +125,12 @@ ALTER TABLE "Sensor" ADD CONSTRAINT "Sensor_sensorTypeId_fkey" FOREIGN KEY ("sen
 
 -- AddForeignKey
 ALTER TABLE "SensorValue" ADD CONSTRAINT "SensorValue_sensorId_fkey" FOREIGN KEY ("sensorId") REFERENCES "Sensor"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Condition" ADD CONSTRAINT "Condition_sensorId_fkey" FOREIGN KEY ("sensorId") REFERENCES "Sensor"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_RoomToSensor" ADD CONSTRAINT "_RoomToSensor_A_fkey" FOREIGN KEY ("A") REFERENCES "Room"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_RoomToSensor" ADD CONSTRAINT "_RoomToSensor_B_fkey" FOREIGN KEY ("B") REFERENCES "Sensor"("id") ON DELETE CASCADE ON UPDATE CASCADE;

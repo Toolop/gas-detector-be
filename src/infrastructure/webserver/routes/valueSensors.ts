@@ -1,7 +1,6 @@
 import express from "express";
-import authMiddleware from "../../middleware/token";
-import valueSensorRepository from "../../../domain/repository/room";
-import valueSensorDbRepository from "../../db/room/room";
+import valueSensorRepository from "../../../domain/repository/sensorValue";
+import valueSensorDbRepository from "../../mongoDb/db/sensor";
 import sensorValueController from "../../../controller/sensorValue/sensorValueController";
 const router = express.Router();
 
