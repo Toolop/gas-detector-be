@@ -51,7 +51,7 @@ model Room {
 model RoomOnUser {
   User   User @relation(fields: [userId], references: [id])
   userId Int
-  Role   Room @relation(fields: [roomId], references: [id])
+  room   Room @relation(fields: [roomId], references: [id])
   roomId Int
 
   @@id([userId, roomId])
@@ -68,6 +68,7 @@ model Sensor {
   SensorType   SensorType?   @relation(fields: [sensorTypeId], references: [id])
   SensorValue  SensorValue[]
   sensorTypeId Int?
+  condition    Condition[]
 }
 
 model SensorType {
@@ -87,9 +88,13 @@ model SensorValue {
 }
 
 model Condition {
-  id        Int       @id @default(autoincrement())
-  set_point Int
-  type      Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id           Int       @id @default(autoincrement())
+  upperDanger  Int
+  upperWarning Int
+  lowerDanger  Int
+  lowerWarning Int
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+  Sensor       Sensor?   @relation(fields: [sensorId], references: [id])
+  sensorId     Int?
 }

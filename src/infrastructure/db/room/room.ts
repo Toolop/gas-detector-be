@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import deleteRoom from "src/domain/use_case/room/delete";
 
 const prisma = new PrismaClient({});
 
@@ -54,7 +53,7 @@ export default function roomRepository() {
     });
   };
 
-  const updateById = async (id: number,name:string) => {
+  const updateById = async (id: number, name: string) => {
     return await prisma.room.update({
       where: { id: id },
       data: { name: name },
@@ -70,8 +69,6 @@ export default function roomRepository() {
       });
     });
   }
-
-
 
   return {
     add,

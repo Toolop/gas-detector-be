@@ -1,16 +1,15 @@
-import addSensorValueUseCase from "../../domain/use_case/sensorValue/add";
+import getSensorValueUseCase from "../../domain/use_case/sensorValue/get";
 
 export default function sensorController(
     DbRepository: any,
     DbRepositoryImpl: any
 ) {
-    const dbRepository = DbRepository(DbRepositoryImpl());
+    const repository = DbRepository(DbRepositoryImpl());
 
-    const addValueSensor = (req: any, res: any, next: any) => {
+    const getValueSensor = (req: any, res: any, next: any) => {
         try {
-            const value = 0;
-            const sensorId = 1;
-            addSensorValueUseCase(value, sensorId, DbRepository)
+            const sensorId: number = parseInt(req.query.roomId);
+            getSensorValueUseCase(sensorId, repository)
                 .then((room: any) => {
                     res.status(201);
                     res.json(room);
@@ -26,6 +25,6 @@ export default function sensorController(
     };
 
     return {
-        addValueSensor
+        getValueSensor
     };
 }

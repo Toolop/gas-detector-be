@@ -2,12 +2,12 @@ import room from "../../../entities/room";
 
 const addRoom = (name: string, userid: number, repository: any) => {
   // TODO: add a proper validation (consider using @hapi/joi)
-  if (!name) {
-    throw new Error("room name cannot be empty");
+  if (!name || !userid) {
+    throw new Error("room name and userid cannot be empty");
   }
 
   const newRoom = room(name);
-  
+
 
   return repository.add(newRoom).then((room: any) => {
     if (!room.id) {
