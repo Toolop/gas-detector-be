@@ -1,7 +1,10 @@
 const getSensorValueUseCase = (
     sensorId: number, repository: any
 ) => {
-    return repository.getLastByIdRepo(sensorId)
+    if (!sensorId) {
+        throw new Error("sensorId needed in query")
+    }
+    return repository.findById(sensorId)
 };
 
 export default getSensorValueUseCase;

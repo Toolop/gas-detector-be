@@ -8,7 +8,7 @@ export default function sensorController(
 
     const getValueSensor = (req: any, res: any, next: any) => {
         try {
-            const sensorId: number = parseInt(req.query.roomId);
+            const sensorId: number = parseInt(req.query.sensorId);
             getSensorValueUseCase(sensorId, repository)
                 .then((room: any) => {
                     res.status(201);

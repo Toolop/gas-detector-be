@@ -7,7 +7,7 @@ import subscribeSensor from "../../controller/client/sensorValue"
 
 const subscribe = () => {
     try {
-        subscribeSensor(sensorRepository, sensorDbRepository, sensorValueRepository, sensorValueDbRepository);
+        subscribeSensor(sensorValueRepository, sensorValueDbRepository, sensorRepository, sensorDbRepository,);
     }
     catch (err) {
         console.log(err)
