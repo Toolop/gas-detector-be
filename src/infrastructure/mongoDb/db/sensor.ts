@@ -18,7 +18,7 @@ export default function sensorValueRepository() {
     ];
 
     const add = async (sensorValueEntity: any) => {
-        return await sensor.create(sensorValueEntity);
+        return await sensor.insertMany(sensorValueEntity);
     };
 
     const findLastById = async (id: number) => {
