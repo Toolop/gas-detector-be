@@ -71,8 +71,8 @@ export default function sensorController(
   const updateSensorByIdSensor = (req: any, res: any, next: any) => {
     try {
       const sensorId = parseInt(req.params["id"]);
-      const { name } = req.body;
-      updateSensor(sensorId, name, dbRepository)
+      const { name, calibration, sensorTypeId, roomId } = req.body;
+      updateSensor(name, calibration, parseInt(sensorTypeId), parseInt(roomId), sensorId, dbRepository)
         .then((sensor: any) => {
           res.status(201);
           res.send("update successfully");

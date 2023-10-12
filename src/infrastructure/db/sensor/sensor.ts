@@ -11,6 +11,10 @@ export default function sensorRepository() {
 
   const findById = async (id: number) => {
     return await prisma.sensor.findFirst({
+      include: {
+        SensorType: true,
+        room: true
+      },
       where: {
         id: id,
       },
@@ -21,19 +25,18 @@ export default function sensorRepository() {
     return await prisma.sensor.findMany({
       include: {
         SensorType: true,
+        room: true
       },
       where: params,
     });
   };
 
-  const update = async (id: number, name: string) => {
+  const update = async (id: number, data: any) => {
     return await prisma.sensor.update({
       where: {
         id: id
       },
-      data: {
-        name: name
-      }
+      data: data,
     })
   }
 
@@ -49,6 +52,7 @@ export default function sensorRepository() {
     return await prisma.sensor.findMany({
       include: {
         SensorType: true,
+        room: true
       },
       where: {
         roomId: id,
@@ -60,6 +64,7 @@ export default function sensorRepository() {
     return await prisma.sensor.findMany({
       include: {
         SensorType: true,
+        room: true
       },
     });
   };

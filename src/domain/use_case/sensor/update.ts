@@ -1,4 +1,12 @@
-const updateSensor = (sensorId: number, name: any, repository: any) => {
+import sensor from "../../../entities/sensor";
+
+const updateSensor = (name: string, calibration: string, sensorTypeId: number, roomId: number, sensorId: number, repository: any) => {
+    const updateSensor = sensor(
+        name,
+        calibration,
+        sensorTypeId,
+        roomId,
+    );
 
     return repository.findById(sensorId)
         .then((Sensor: any) => {
@@ -6,7 +14,7 @@ const updateSensor = (sensorId: number, name: any, repository: any) => {
                 throw new Error(`sensor not found`);
             }
             if (name) {
-                return repository.updateRepo(sensorId, name);
+                return repository.updateRepo(sensorId, updateSensor);
             }
             throw new Error("name must be not empty");
         });
