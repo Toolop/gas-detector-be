@@ -39,6 +39,7 @@ export default function sensorValueRepository() {
                 $match: {
                     $and: [
                         { sensorId: id },
+                        { value: { $gt: 0 } },
                         { createdAt: { $gte: start, $lt: end } },
                     ],
                 },
@@ -99,7 +100,7 @@ export default function sensorValueRepository() {
         ]);
     }
 
-    const getGrafikByWeek = async (id: number) => {
+    const getGrafikByidWeek = async (id: number) => {
         var date = new Date();
         const month = date.getMonth();
         const year = date.getFullYear();
@@ -108,14 +109,14 @@ export default function sensorValueRepository() {
             {
                 $match: {
                     $and: [
-                        { id_sensor: id },
+                        { sensorId: id },
+                        { value: { $gt: 0 } },
                         {
                             createdAt: {
                                 $gte: new Date(year, month, 1),
                                 $lt: new Date(year, month + 1, 0),
                             },
                         },
-                        { status: "online" },
                     ],
                 },
             },
@@ -163,7 +164,7 @@ export default function sensorValueRepository() {
             },
         ]);
     }
-    const getGrafikByMonth = async (id: number) => {
+    const getGrafikByidMonth = async (id: number) => {
         var date = new Date();
         const month = date.getMonth();
         const year = date.getFullYear();
@@ -172,13 +173,13 @@ export default function sensorValueRepository() {
                 $match: {
                     $and: [
                         { sensorId: id },
+                        { value: { $gt: 0 } },
                         {
                             createdAt: {
                                 $gte: new Date(year, month, 1),
                                 $lt: new Date(year, month + 1, 0),
                             },
                         },
-                        { status: "online" },
                     ],
                 },
             },
@@ -242,7 +243,7 @@ export default function sensorValueRepository() {
             },
         ]);
     }
-    const getGrafikByYear = async (id: number) => {
+    const getGrafikByidYear = async (id: number) => {
         var date = new Date();
         const year = date.getFullYear();
         return await sensor.aggregate([
@@ -250,13 +251,14 @@ export default function sensorValueRepository() {
                 $match: {
                     $and: [
                         { sensorId: id },
+                        { value: { $gt: 0 } },
                         {
                             createdAt: {
                                 $gte: new Date(year, 1, 1),
                                 $lt: new Date(year, 12, 0),
                             },
                         },
-                        { status: "online" },
+
                     ],
                 },
             },
@@ -299,9 +301,9 @@ export default function sensorValueRepository() {
         add,
         findLastById,
         getGrafikByidDay,
-        getGrafikByWeek,
-        getGrafikByMonth,
-        getGrafikByYear,
+        getGrafikByidWeek,
+        getGrafikByidMonth,
+        getGrafikByidYear,
 
     };
 }
