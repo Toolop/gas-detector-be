@@ -15,9 +15,9 @@ export default function sensorController(
                 getDateQuery,
                 dbRepository
             )
-                .then((room: any) => {
-                    res.status(201);
-                    res.json(room);
+                .then((grafik: any) => {
+                    res.status(200);
+                    res.json(grafik);
                 })
                 .catch((err: any) => {
                     res.status(400);

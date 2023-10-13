@@ -40,10 +40,10 @@ const subscribeSensor = async (
                 if (getData[0]) {
                     for (const i in getData) {
                         const sensorDB = await sensorRepository.findById(parseInt(getData[i].sensorId));
-                        const formula = sensorDB.calibration;
-                        const x = parseFloat(getData[i].value);
+                        const formula: any = sensorDB.calibration;
+                        const x: number = parseFloat(getData[i].value);
                         let value: number = 0;
-                        if (formula) {
+                        if (formula != null) {
                             value = await eval(formula).toFixed(2);
                             if (value <= 0) {
                                 value = 0;
