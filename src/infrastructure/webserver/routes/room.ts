@@ -7,12 +7,12 @@ const router = express.Router();
 
 const controller = roomController(roomRepository, roomDbRepository);
 
-router.post("/", controller.addNewRoom);
+router.post("/", authMiddleware, controller.addNewRoom);
 
-router.get("/", controller.getRooms);
+router.get("/", authMiddleware, controller.getRooms);
 
-router.put("/:id", controller.updateRoomControl);
+router.put("/:id", authMiddleware, controller.updateRoomControl);
 
-router.delete("/:id", controller.deleteRoomControl);
+router.delete("/:id", authMiddleware, controller.deleteRoomControl);
 
 export default router;
