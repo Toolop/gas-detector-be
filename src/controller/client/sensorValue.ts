@@ -37,10 +37,17 @@ const subscribeSensor = async (
             try {
                 let save = "";
                 let getData = await JSON.parse(payload.toString());
+                console.log(getData);
                 if (getData[0]) {
                     for (const i in getData) {
                         const sensorDB = await sensorRepository.findById(parseInt(getData[i].sensorId));
-                        const formula: any = sensorDB.calibration;
+                        let formula: any = "";
+                        if (sensorDB === null) {
+                             formula = null;
+                        }
+                        else {  
+                             formula = sensorDB.calibration;
+                        }
                         const x: number = parseFloat(getData[i].value);
                         let value: number = 0;
                         if (formula != null) {
