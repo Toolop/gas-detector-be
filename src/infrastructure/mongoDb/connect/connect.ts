@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import config from "../../../config/config";
 
 const connectMongoose = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/test');
+        await mongoose.connect(config.mongodb);
     } catch (err) {
         console.log(err)
     }
