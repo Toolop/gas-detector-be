@@ -89,7 +89,7 @@ model SensorValue {
 
 model Condition {
   id           Int       @id @default(autoincrement())
-  upperDanger  Int?
+  upperDanger  Int
   upperWarning Int
   lowerDanger  Int
   lowerWarning Int

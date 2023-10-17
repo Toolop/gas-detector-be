@@ -63,7 +63,17 @@ export default function conditionRepository() {
             }
         });
     }
-
+    const findBySensorId = async (id: number) => {
+        return await prisma.sensor.findFirst({
+            include: {
+                SensorType: true,
+                room: true
+            },
+            where: {
+                id: id,
+            },
+        });
+    };
 
     return {
         add,
@@ -74,5 +84,6 @@ export default function conditionRepository() {
         findAll,
         deleteCondition,
         checkSensor,
+        findBySensorId
     };
 }
