@@ -29,5 +29,7 @@ router.post("/login", auth.login);
 router.post("/register", controller.addNewUser);
 
 router.get("/user/:id", authMiddleware, controller.getUserByNumberId);
+router.put("/user/:id", authMiddleware, controller.updateUser);
+
 
 export default router;

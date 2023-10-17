@@ -27,10 +27,20 @@ export default function userRepository() {
     return await prisma.user.findMany({});
   };
 
+  const updateUser = async (id: number, data: any) => {
+    return await prisma.user.update({
+      where: {
+        id: id
+      },
+      data: data,
+    })
+  }
+
   return {
     add,
     findAll,
     findById,
+    updateUser,
     findByProperty,
   };
 }

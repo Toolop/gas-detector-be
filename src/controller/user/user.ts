@@ -1,5 +1,7 @@
+import updateUserUseCase from "../../domain/use_case/user/update";
 import addUser from "../../domain/use_case/user/add";
 import getUserById from './../../domain/use_case/user/get';
+
 export default function userController(
   userDbRepository: any,
   userDbRepositoryImpl: any,
@@ -30,14 +32,34 @@ export default function userController(
     try {
       const { id } = req.params;
       const user = await getUserById(parseInt(id), dbRepository, authService);
-      res.status(200).json(user); 
+      res.status(200).json(user);
     } catch (err) {
       res.status(400).send(`${err}`);
     }
   };
 
+  const updateUser = async (req: any, res: any) => {
+    try {
+      const userId = parseInt(req.params["id"]);
+      const { username, password, email, name } = req.body;
+      updateUserUseCase(username, password, email, name, userId, dbRepository, authService)
+        .then((user: any) => {
+          res.status(201);
+          res.send("update successfully");
+        })
+        .catch((err: any) => {
+          res.status(404);
+          res.send(`${err}`);
+        });
+    } catch (err) {
+      res.status(400);
+      res.send(`${err}`);
+    }
+  }
+
   return {
     addNewUser,
     getUserByNumberId,
+    updateUser
   };
 }
