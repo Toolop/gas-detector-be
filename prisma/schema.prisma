@@ -89,12 +89,12 @@ model SensorValue {
 
 model Condition {
   id           Int       @id @default(autoincrement())
-  upperDanger  Int
+  upperDanger  Int?
   upperWarning Int
   lowerDanger  Int
   lowerWarning Int
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
   Sensor       Sensor?   @relation(fields: [sensorId], references: [id])
-  sensorId     Int?
+  sensorId     Int?      @unique
 }
