@@ -1,7 +1,8 @@
 import getRoomsByUserid from "../../domain/use_case/room/getByUser";
 import addRoom from "../../domain/use_case/room/add";
 import updateRoom from "../../domain/use_case/room/update";
-import deleteRoom from './../../domain/use_case/room/delete';
+import deleteRoom from "../../domain/use_case/room/delete";
+import getRoomDetailUseCase from "../../domain/use_case/room/detail";
 export default function roomController(
   roomDbRepository: any,
   roomDbRepositoryImpl: any
@@ -45,6 +46,23 @@ export default function roomController(
       res.send(`${err}`);
     }
   };
+  const getDetailRoomController = (req: any, res: any, next: any) => {
+    try {
+      const roomId = parseInt(req.params["id"]);
+      getRoomDetailUseCase(roomId, dbRepository)
+        .then((room: any) => {
+          res.status(200);
+          res.json(room);
+        })
+        .catch((err: any) => {
+          res.status(404);
+          res.send(`${err}`);
+        });
+    } catch (err) {
+      res.status(400);
+      res.send(`${err}`);
+    }
+  };
 
   const updateRoomControl = (req: any, res: any) => {
     try {
@@ -63,7 +81,7 @@ export default function roomController(
       res.status(400);
       res.send(`${err}`);
     }
-  }
+  };
 
   const deleteRoomControl = (req: any, res: any) => {
     try {
@@ -81,13 +99,13 @@ export default function roomController(
       res.status(400);
       res.send(`${err}`);
     }
-  }
-
+  };
 
   return {
     addNewRoom,
     getRooms,
+    getDetailRoomController,
     updateRoomControl,
-    deleteRoomControl
+    deleteRoomControl,
   };
 }

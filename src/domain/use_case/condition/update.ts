@@ -6,14 +6,12 @@ const updateConditionUseCase = async (upperDanger: number, upperWarning: number,
         throw new Error("condition setpoint cannot be empty");
     }
 
-    const updateCondition = condition(upperDanger, upperWarning, lowerDanger, lowerWarning, id);
-
-    return await repository.findByIdRepo(id)
+    return await repository.findByIdSensorRepo(id)
         .then((room: any) => {
             if (room === null) {
                 throw new Error(`room not found`);
             }
-            return repository.updateRepo(id, updateCondition);
+            return repository.updateRepo(id, upperDanger, upperWarning, lowerDanger, lowerWarning);
         });
 }
 
