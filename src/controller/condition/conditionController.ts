@@ -66,9 +66,9 @@ export default function conditionController(
 
     const updateConditionController = (req: any, res: any, next: any) => {
         try {
-            const conditionId = parseInt(req.params["id"]);
+            const sensorId = parseInt(req.params["id"]);
             const { upperDanger, upperWarning, lowerDanger, lowerWarning } = req.body;
-            updateConditionUseCase(parseInt(upperDanger), parseInt(upperWarning), parseInt(lowerDanger), parseInt(lowerWarning), conditionId, dbRepository)
+            updateConditionUseCase(parseInt(upperDanger), parseInt(upperWarning), parseInt(lowerDanger), parseInt(lowerWarning), sensorId, dbRepository)
                 .then(() => {
                     res.status(201);
                     res.send("update successfully");

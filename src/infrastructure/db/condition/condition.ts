@@ -23,12 +23,16 @@ export default function conditionRepository() {
         });
     };
 
-    const update = async (id: number, conditionEntity: object) => {
+    const update = async (id: number, upperDanger: number, upperWarning: number, lowerDanger: number, lowerWarning: number) => {
         return await prisma.condition.update({
             where: {
-                id: id
-            },
-            data: conditionEntity
+                sensorId: id
+            }, data: {
+                upperDanger: upperDanger,
+                upperWarning: upperWarning,
+                lowerDanger: lowerDanger,
+                lowerWarning: lowerWarning,
+            }
         })
     }
 
@@ -59,7 +63,17 @@ export default function conditionRepository() {
             }
         });
     }
-
+    const findBySensorId = async (id: number) => {
+        return await prisma.sensor.findFirst({
+            include: {
+                SensorType: true,
+                room: true
+            },
+            where: {
+                id: id,
+            },
+        });
+    };
 
     return {
         add,
@@ -70,5 +84,6 @@ export default function conditionRepository() {
         findAll,
         deleteCondition,
         checkSensor,
+        findBySensorId
     };
 }

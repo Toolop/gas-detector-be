@@ -96,5 +96,5 @@ model Condition {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
   Sensor       Sensor?   @relation(fields: [sensorId], references: [id])
-  sensorId     Int?
+  sensorId     Int?      @unique
 }
