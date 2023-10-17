@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddleware from "../../middleware/token";
+// import authMiddleware from "../../middleware/token";
 import userController from "../../../controller/user/user";
 import authController from "../../../controller/auth/auth";
 import userRepository from "../../../domain/repository/user";
@@ -28,6 +28,6 @@ router.post("/login", auth.login);
 
 router.post("/register", controller.addNewUser);
 
-router.get("/user/:id", authMiddleware, controller.getUserByNumberId);
+router.get("/user/:id", controller.getUserByNumberId);
 
 export default router;
