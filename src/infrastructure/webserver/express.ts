@@ -7,7 +7,7 @@ import config from "../../config/config";
 function expressServer() {
   const app = express();
   //express js
-  app.use(cors("http://127.0.0.1:5173/"));
+  app.use(cors("http://103.175.216.24/"));
   app.use(bodyParser.urlencoded({ extended: true }));
 
   routes(app);
