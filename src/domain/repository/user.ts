@@ -4,6 +4,8 @@ export default function userRepository(repository: any) {
   const findById = (id: any) => repository.findById(id);
   const add = (user: any) => repository.add(user);
   const deleteById = (id: number) => repository.deleteById(id);
+  const updateRepo = (id: number, data: any) => repository.updateUser(id, data);
+
 
   return {
     findByProperty,
@@ -11,5 +13,6 @@ export default function userRepository(repository: any) {
     findById,
     add,
     deleteById,
+    updateRepo
   };
 }

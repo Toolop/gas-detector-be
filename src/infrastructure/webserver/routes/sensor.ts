@@ -1,5 +1,5 @@
 import express from "express";
-// import from "../../middleware/token";
+import authMiddleware from "../../middleware/token";
 import sensorRepository from "../../../domain/repository/sensor";
 import sensorDbRepository from "../../db/sensor/sensor";
 import sensorController from "../../../controller/sensor/sensorController";
@@ -7,14 +7,14 @@ const router = express.Router();
 
 const controller = sensorController(sensorRepository, sensorDbRepository);
 
-router.post("/",  controller.addNewSensor);
+router.post("/", authMiddleware, controller.addNewSensor);
 
-router.get("/",  controller.getSensorByRoomId);
+router.get("/", authMiddleware, controller.getSensorByRoomId);
 
-router.get("/:id",  controller.getSensorByIdSensor);
+router.get("/:id", authMiddleware, controller.getSensorByIdSensor);
 
-router.put("/:id",  controller.updateSensorByIdSensor);
+router.put("/:id", authMiddleware, controller.updateSensorByIdSensor);
 
-router.delete("/:id",  controller.deleteController);
+router.delete("/:id", authMiddleware, controller.deleteController);
 
 export default router;
