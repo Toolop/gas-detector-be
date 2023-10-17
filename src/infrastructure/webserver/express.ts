@@ -6,7 +6,7 @@ import config from "../../config/config";
 
 function expressServer() {
   const app = express();
-
+  //express js
   app.use(cors("http://127.0.0.1:5173/"));
   app.use(bodyParser.urlencoded({ extended: true }));
 
