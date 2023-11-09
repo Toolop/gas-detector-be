@@ -38,4 +38,4 @@ const publishCondtion = async () => {
   }
 };
 
-publishCondtion();
+export default publishCondtion;

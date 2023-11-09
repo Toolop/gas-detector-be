@@ -3,6 +3,7 @@ import addConditionUseCase from "../../domain/use_case/condition/add";
 import getConditionDetailUseCase from "../../domain/use_case/condition/getDetail";
 import updateConditionUseCase from "../../domain/use_case/condition/update";
 import deleteConditionUseCase from "../../domain/use_case/condition/delete";
+import publishCondtion from "../client/condition";
 
 export default function conditionController(
   DbRepository: any,
@@ -25,6 +26,7 @@ export default function conditionController(
         .then((condition: any) => {
           res.status(201);
           res.json(condition);
+          publishCondtion();
         })
         .catch((err: any) => {
           res.status(400);
@@ -42,6 +44,7 @@ export default function conditionController(
         .then((condition: any) => {
           res.status(200);
           res.json(condition);
+          publishCondtion();
         })
         .catch((err: any) => {
           res.status(400);
@@ -59,6 +62,7 @@ export default function conditionController(
         .then((condition: any) => {
           res.status(200);
           res.json(condition);
+          publishCondtion();
         })
         .catch((err: any) => {
           res.status(404);
@@ -85,6 +89,7 @@ export default function conditionController(
         .then(() => {
           res.status(201);
           res.send("update successfully");
+          publishCondtion();
         })
         .catch((err: any) => {
           res.status(404);
@@ -103,6 +108,7 @@ export default function conditionController(
         .then(() => {
           res.status(200);
           res.send("delete successfully");
+          publishCondtion();
         })
         .catch((err: any) => {
           res.status(404);

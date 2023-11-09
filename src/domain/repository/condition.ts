@@ -1,8 +1,9 @@
 export default function conditionRepository(repository: any) {
     const findByPropertyRepo = (params: any) => repository.findByProperty(params);
     const findByIdRepo = (id: number) => repository.findById(id);
+    const findByIdSensorRepo = (id: number) => repository.findBySensorId(id);
     const getLastByIdRepo = (id: number) => repository.findLastById(id);
-    const updateRepo = (id: number, entity: any) => repository.update(id, entity);
+    const updateRepo = (id: number, upperDanger: number, upperWarning: number, lowerDanger: number, lowerWarning: number) => repository.update(id, upperDanger, upperWarning, lowerDanger, lowerWarning);
     const addRepo = (condition: any) => repository.add(condition);
     const deleteRepo = (id: number) => repository.deleteCondition(id);
     const checkSensorRepo = (id: number) => repository.checkSensor(id);
@@ -13,6 +14,7 @@ export default function conditionRepository(repository: any) {
         checkSensorRepo,
         findByIdRepo,
         addRepo,
+        findByIdSensorRepo,
         updateRepo,
         getLastByIdRepo,
         deleteRepo,
