@@ -27,7 +27,7 @@ const subscribeSensor = async (
     });
     dotenv.config();
 
-    const topic = "scofindo/gasdetector/sensor/#";
+    const topic = process.env.topicsensor;
     client.on("connect", () => {
       console.log("Connected");
       client.subscribe([topic], () => {

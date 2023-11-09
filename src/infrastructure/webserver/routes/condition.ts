@@ -5,11 +5,14 @@ import conditionDbRepository from "../../db/condition/condition";
 import conditionController from "../../../controller/condition/conditionController";
 const router = express.Router();
 
-const controller = conditionController(conditionRepository, conditionDbRepository);
+const controller = conditionController(
+  conditionRepository,
+  conditionDbRepository
+);
 
 router.post("/", authMiddleware, controller.addNewConditionController);
 
-router.get("/", authMiddleware, controller.getConditionsController);
+router.get("/", authMiddleware);
 
 router.get("/:id", authMiddleware, controller.getConditionDetailController);
 
