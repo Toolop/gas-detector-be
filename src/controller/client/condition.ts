@@ -22,17 +22,7 @@ const publishCondtion = async () => {
 
     let message = await prisma.condition.findMany({});
 
-    client.publish(
-      topic,
-      JSON.stringify(message),
-      { qos: 0, retain: false },
-      function (error: any) {
-        if (error) {
-        } else {
-          console.log("Published");
-        }
-      }
-    );
+    client.publish(topic, JSON.stringify(message), { qos: 0, retain: false });
   } catch (err) {
     console.log(err);
   }

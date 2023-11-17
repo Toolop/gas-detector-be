@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-const bcrypt = require("bcrypt");
+import bcrypt from "bcryptjs";
 
 async function main() {
   const createType = await prisma.sensorType.createMany({
@@ -16,7 +16,7 @@ async function main() {
       },
     ],
   });
-  const hashedPassword = await bcrypt.hash("sucofindo", 10);
+  const hashedPassword = await bcrypt.hashSync("sucofindo", 10);
   const userInsert = await prisma.user.createMany({
     data: [
       {
