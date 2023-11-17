@@ -1,7 +1,5 @@
 const dotenv = require("dotenv");
 const mqtt = require("mqtt");
-const clientId = `mqttScofindo_${Math.random().toString(16).slice(3)}`;
-const connectUrl = `mqtt://broker.hivemq.com:1883/mqtt`;
 
 const subscribeSensor = async (
   sensorValueDbRepository: any,
@@ -10,12 +8,18 @@ const subscribeSensor = async (
   sensorDbRepositoryImpl: any
 ) => {
   try {
+    dotenv.config();
+
     const sensorRepository = sensorDbRepository(sensorDbRepositoryImpl());
     const sensorValueRepository = sensorValueDbRepository(
       sensorValueDbRepositoryImpl()
     );
 
-    const client = await mqtt.connect(connectUrl, {
+    const clientId = `${process.env.clientMqtt}${Math.random()
+      .toString(16)
+      .slice(3)}`;
+
+    const client = await mqtt.connect(process.env.mqttUrl, {
       clientId,
       keepalive: 30,
       protocolId: "MQTT",
@@ -24,10 +28,11 @@ const subscribeSensor = async (
       connectTimeout: 30 * 1000,
       rejectUnauthorized: false,
       reconnectPeriod: 1000,
+      username: process.env.usernameMqtt,
+      password: process.env.passwordMqtt,
     });
-    dotenv.config();
 
-    const topic = "scofindo/gasdetector/sensor/#";
+    const topic = process.env.topicSensor;
     client.on("connect", () => {
       console.log("Connected");
       client.subscribe([topic], () => {

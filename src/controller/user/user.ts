@@ -1,6 +1,6 @@
 import updateUserUseCase from "../../domain/use_case/user/update";
 import addUser from "../../domain/use_case/user/add";
-import getUserById from './../../domain/use_case/user/get';
+import getUserById from "./../../domain/use_case/user/get";
 
 export default function userController(
   userDbRepository: any,
@@ -30,8 +30,12 @@ export default function userController(
   };
   const getUserByNumberId = async (req: any, res: any) => {
     try {
-      const { id } = req.params;
-      const user = await getUserById(parseInt(id), dbRepository, authService);
+      const userId = req.token.user.id;
+      const user = await getUserById(
+        parseInt(userId),
+        dbRepository,
+        authService
+      );
       res.status(200).json(user);
     } catch (err) {
       res.status(400).send(`${err}`);
@@ -40,9 +44,17 @@ export default function userController(
 
   const updateUser = async (req: any, res: any) => {
     try {
-      const userId = parseInt(req.params["id"]);
+      const userId = req.token.user.id;
       const { username, password, email, name } = req.body;
-      updateUserUseCase(username, password, email, name, userId, dbRepository, authService)
+      updateUserUseCase(
+        username,
+        password,
+        email,
+        name,
+        userId,
+        dbRepository,
+        authService
+      )
         .then((user: any) => {
           res.status(201);
           res.send("update successfully");
@@ -55,11 +67,11 @@ export default function userController(
       res.status(400);
       res.send(`${err}`);
     }
-  }
+  };
 
   return {
     addNewUser,
     getUserByNumberId,
-    updateUser
+    updateUser,
   };
 }

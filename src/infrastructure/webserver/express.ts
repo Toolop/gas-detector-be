@@ -7,13 +7,15 @@ import config from "../../config/config";
 function expressServer() {
   const app = express();
   //express js
-  app.use(cors("http://103.175.216.24/"));
+  app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
 
   routes(app);
 
   app.listen(config.port, () => {
-    console.log(`[server] server dimulai di http://localhost:${config.port} ⚡`);
+    console.log(
+      `[server] server dimulai di http://localhost:${config.port} ⚡`
+    );
   });
 }
 
