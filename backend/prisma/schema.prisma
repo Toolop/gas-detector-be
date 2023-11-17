@@ -58,15 +58,14 @@ model RoomOnUser {
 }
 
 model Sensor {
-  id           Int           @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   name         String
   calibration  String?
-  room         Room?         @relation(fields: [roomId], references: [id])
+  room         Room?       @relation(fields: [roomId], references: [id])
   roomId       Int
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime?     @updatedAt
-  SensorType   SensorType?   @relation(fields: [sensorTypeId], references: [id])
-  SensorValue  SensorValue[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime?   @updatedAt
+  SensorType   SensorType? @relation(fields: [sensorTypeId], references: [id])
   sensorTypeId Int?
   condition    Condition[]
 }
@@ -77,14 +76,6 @@ model SensorType {
   Sensor    Sensor[]
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
-}
-
-model SensorValue {
-  id        Int      @id @default(autoincrement())
-  value     String
-  createdAt DateTime @default(now())
-  Sensor    Sensor?  @relation(fields: [sensorId], references: [id])
-  sensorId  Int?
 }
 
 model Condition {
