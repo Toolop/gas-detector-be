@@ -1,0 +1,36 @@
+
+/* Active links */
+
+.active-flex {
+  background-color: #E6E6E6 !important;
+}
+
+#navbar a.active {
+  color: #0E1D34 !important;
+  font-weight: 700 !important;
+}
+
+a.active {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+a{
+  color: #000000 !important;
+  font-weight: 500 !important;
+}
+
+#navbar a:hover{
+  color: #0E1D34 !important;
+}
+a:hover{
+  font-weight: bold !important;
+  text-decoration: none;
+}
+.login:hover {
+  background-color: #0D42FF !important; /* Ganti dengan warna yang Anda inginkan */
+}
+
+#css-1fzdmi5 {
+  width: 100%;
+}
