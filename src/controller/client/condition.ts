@@ -27,9 +27,35 @@ const publishCondtion = async () => {
 
     const topic = process.env.topicCondition;
 
-    let message = await prisma.condition.findMany({});
+    let message = await prisma.condition.findMany({
+      select: {
+        id: true,
+      },
+    });
+    for (let i = 0; i < message.length; i++) {
+      const sendData = await prisma.condition.findMany({
+        where: { sensorId: message[i].id },
+        select: {
+          sensorId: true,
+          upperDanger: true,
+          upperWarning: true,
+          lowerDanger: true,
+          lowerWarning: true,
+        },
+      });
 
-    client.publish(topic, JSON.stringify(message), { qos: 0, retain: false });
+      client.publish(
+        `${topic}/${sendData[0].sensorId}`,
+        JSON.stringify(sendData[0]),
+        { qos: 2, retain: false },
+        function (error: any) {
+          if (error) {
+            console.log(error);
+          } else {
+          }
+        }
+      );
+    }
   } catch (err) {
     console.log(err);
   }
