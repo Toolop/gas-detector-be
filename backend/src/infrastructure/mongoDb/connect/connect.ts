@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import config from "../../../config/config";
+const config = require("../../../config/config");
+
 
 const connectMongoose = async () => {
   try {
