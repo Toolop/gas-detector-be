@@ -14,22 +14,37 @@ const Room = () => {
   const [data, setData] = useState([]);
   const [dataSensor, setSensorData] = useState([]);
   const getData = async () => {
-    await axios(`${room.get + 1}`).then((res) => {
-      setData(res.data);
-    });
-  };
-  console.log(data);
+    await axios(`${room.get + 1}`,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') 
+      }
+    })
+    .then((res) => {
+      setData(res.data)
+    })
+  }
   const getSensor = async () => {
-    await axios(`${sensor.get + 1}`).then((res) => {
-      setSensorData(res.data);
-    });
-  };
-
+    await axios(`${sensor.get + 1}`,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') 
+      }
+    })
+    .then((res) => {
+      setSensorData(res.data)
+    })
+  }
+  const checkToken = () => {
+    if (localStorage.getItem('token') === null) {
+      window.location.href = '/login'
+    }
+  }
   useEffect(() => {
-    getData();
-    getSensor();
-  }, []);
-  TabTitle("Room - Gas Detector Monitoring");
+    getData()
+    checkToken()
+    getSensor()
+  }
+  ,[])
+  TabTitle('Room - Gas Detector Monitoring')
   return (
     <>
       {data.map((item) => {

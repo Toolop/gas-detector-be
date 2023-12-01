@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react"
 import { Flex, Text, Image } from "@chakra-ui/react"
 import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 import './navbar.css'
 const Board = () => {
   const location = useLocation();
@@ -31,6 +32,12 @@ const Board = () => {
           <Flex>
             <Image src={"/logo.png"} alt="logo" mt={{base:0}} maxH={{base:"80px"}}/>
           </Flex>
+          <Flex 
+            w={{base:'100%',md:'90%'}}
+            justify={'space-between'}
+            alignItems={'center'}
+            alignContent={'center'}
+          >
           <Flex
             flexDir={'column'}
             justify={'space-between'}
@@ -42,6 +49,17 @@ const Board = () => {
             <Flex mt={{base:0,md:0,lg:1}} >
               <Text fontWeight={'regular'} letterSpacing={1} fontSize={{base:"var(--header-6)",md:"var(--header-5)",lg:"var(--header-5)"}}> SUCOFINDO LABORATORIUM CIBITUNG</Text>
             </Flex>
+          </Flex>
+          <Flex 
+            onClick={
+              () => {
+                localStorage.removeItem('token')
+                window.location.href = '/login'
+              }
+            }
+          >
+            <FiLogOut  size={25} color={'black'} />
+          </Flex>
           </Flex>
         </Flex>
         <Flex  height={{base:'85vh',sm:'85vh'}} flexDir={'column'} alignSelf={'center'} alignItems={'center'} alignContent={'center'} justify={'center'} width={'96%'}>

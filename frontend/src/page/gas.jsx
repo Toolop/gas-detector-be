@@ -14,20 +14,33 @@ const Gas = () => {
   const [dataSensor, setSensorData] = useState([])
 
   const getData = async () => {
-    await axios(`${room.get + 1}`)
+    await axios(`${room.get + 1}`,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') 
+      }
+    })
     .then((res) => {
       setData(res.data)
     })
   }
-  console.log(data)
   
   const getSensor = async () => {
-    await axios(`${sensor.get + 1}`)
+    await axios(`${sensor.get + 1}`,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') 
+      }
+    })
     .then((res) => {
       setSensorData(res.data)
     })
   }
+  const checkToken = () => {
+    if (localStorage.getItem('token') === null) {
+      window.location.href = '/login'
+    }
+  }
   useEffect(() => {
+    checkToken()
     getData()
     getSensor()
   }

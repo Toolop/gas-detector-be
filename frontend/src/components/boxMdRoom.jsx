@@ -11,7 +11,11 @@ const Environment = ({ name, id }) => {
 
   const getCondition = async () => {
     try {
-      const response = await axios.get(`${condition.get + id}`);
+      const response = await axios.get(`${condition.get + id}`,{
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token') 
+        }
+      });
       setCondition(response.data);
     } catch (error) {
       console.error(error);
@@ -20,7 +24,11 @@ const Environment = ({ name, id }) => {
 
   const getValueRefreshFirst = async () => {
     try {
-      const response = await axios.get(`${brokerSensor.get + id}`);
+      const response = await axios.get(`${brokerSensor.get + id}`,{
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token') 
+        }
+      });
       setData(response.data[0].value);
     } catch (error) {
       console.error(error);
@@ -29,7 +37,11 @@ const Environment = ({ name, id }) => {
 
   const getValueRefreshSecond = async () => {
     try {
-      const response = await axios.get(`${brokerSensor.get + id}`);
+      const response = await axios.get(`${brokerSensor.get + id}`,{
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token') 
+        }
+      });
       setData(response.data[0].value);
     } catch (error) {
       console.error(error);
