@@ -8,4 +8,4 @@ subscribe();
 connectMongoose();
 publishCondtion();
 firstOn();
-setInterval(publishCondtion, 10000);
+publishCondtion();

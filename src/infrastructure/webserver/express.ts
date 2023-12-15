@@ -2,7 +2,7 @@ import express from "express";
 import routes from "./routes/routes";
 const bodyParser = require("body-parser");
 const cors = require("cors");
-import config from "../../config/config";
+const config = require("../../config/config");
 
 function expressServer() {
   const app = express();
@@ -11,7 +11,6 @@ function expressServer() {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   routes(app);
-
   app.listen(config.port, () => {
     console.log(
       `[server] server dimulai di http://localhost:${config.port} ⚡`

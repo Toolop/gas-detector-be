@@ -36,9 +36,7 @@ const firstOn = async () => {
     });
 
     client.on("message", async (topic: string, payload: any) => {
-      if (payload.toString()) {
-        publishCondtion();
-      }
+      publishCondtion();
     });
   } catch (err) {
     console.log(err);
