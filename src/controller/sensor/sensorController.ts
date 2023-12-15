@@ -2,7 +2,7 @@ import addSensor from "../../domain/use_case/sensor/add";
 import getSensors from "../../domain/use_case/sensor/getById";
 import updateSensor from "../../domain/use_case/sensor/update";
 import getSensorDetail from "../../domain/use_case/sensor/getDetail";
-import deleteSensorUseCase from "../../domain/use_case/sensor/delete"
+import deleteSensorUseCase from "../../domain/use_case/sensor/delete";
 
 export default function sensorController(
   DbRepository: any,
@@ -12,12 +12,14 @@ export default function sensorController(
 
   const addNewSensor = (req: any, res: any, next: any) => {
     try {
-      const { name, calibration, sensorTypeId, roomId } = req.body;
+      const { name, calibration, sensorTypeId, roomId, unitMeasurement } =
+        req.body;
       addSensor(
         name,
         calibration,
         parseInt(sensorTypeId),
         parseInt(roomId),
+        unitMeasurement,
         dbRepository
       )
         .then((room: any) => {
@@ -71,8 +73,17 @@ export default function sensorController(
   const updateSensorByIdSensor = (req: any, res: any, next: any) => {
     try {
       const sensorId = parseInt(req.params["id"]);
-      const { name, calibration, sensorTypeId, roomId } = req.body;
-      updateSensor(name, calibration, parseInt(sensorTypeId), parseInt(roomId), sensorId, dbRepository)
+      const { name, calibration, sensorTypeId, roomId, unitMeasurement } =
+        req.body;
+      updateSensor(
+        name,
+        calibration,
+        parseInt(sensorTypeId),
+        parseInt(roomId),
+        sensorId,
+        unitMeasurement,
+        dbRepository
+      )
         .then((sensor: any) => {
           res.status(201);
           res.send("update successfully");
@@ -85,7 +96,7 @@ export default function sensorController(
       res.status(400);
       res.send(`${err}`);
     }
-  }
+  };
 
   const deleteController = (req: any, res: any, next: any) => {
     try {
@@ -99,18 +110,17 @@ export default function sensorController(
           res.status(404);
           res.send(`${err}`);
         });
-
     } catch (err) {
       res.status(400);
       res.send(`${err}`);
     }
-  }
+  };
 
   return {
     addNewSensor,
     getSensorByRoomId,
     getSensorByIdSensor,
     updateSensorByIdSensor,
-    deleteController
+    deleteController,
   };
 }
