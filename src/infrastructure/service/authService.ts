@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-
-import config from "../../config/config";
+const config = require("../../config/config");
 
 export default function authService() {
   const encryptPassword = (password: string) => {
