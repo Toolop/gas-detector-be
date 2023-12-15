@@ -8,7 +8,6 @@ const addRoom = (name: string, userid: number, repository: any) => {
 
   const newRoom = room(name);
 
-
   return repository.add(newRoom).then((room: any) => {
     if (!room.id) {
       throw new Error(`create room id failed to create`);
@@ -19,7 +18,6 @@ const addRoom = (name: string, userid: number, repository: any) => {
       }
       throw new Error(`room id failed to create`);
     }
-    //return repository.addRoomUser(roomid, userid);
   });
 };
 

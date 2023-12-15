@@ -31,9 +31,9 @@ model Role {
 }
 
 model RolesOnUser {
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId Int
-  role   Role @relation(fields: [roleId], references: [id])
+  role   Role @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   roleId Int
 
   @@id([userId, roleId])
@@ -49,25 +49,26 @@ model Room {
 }
 
 model RoomOnUser {
-  User   User @relation(fields: [userId], references: [id])
+  User   User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId Int
-  room   Room @relation(fields: [roomId], references: [id])
+  room   Room @relation(fields: [roomId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   roomId Int
 
   @@id([userId, roomId])
 }
 
 model Sensor {
-  id           Int         @id @default(autoincrement())
-  name         String
-  calibration  String?
-  room         Room?       @relation(fields: [roomId], references: [id])
-  roomId       Int
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime?   @updatedAt
-  SensorType   SensorType? @relation(fields: [sensorTypeId], references: [id])
-  sensorTypeId Int?
-  condition    Condition[]
+  id              Int         @id @default(autoincrement())
+  name            String
+  calibration     String?
+  room            Room?       @relation(fields: [roomId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  roomId          Int
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime?   @updatedAt
+  unitMeasurement String
+  SensorType      SensorType? @relation(fields: [sensorTypeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  sensorTypeId    Int?
+  condition       Condition[]
 }
 
 model SensorType {
@@ -86,6 +87,6 @@ model Condition {
   lowerWarning Int
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
-  Sensor       Sensor?   @relation(fields: [sensorId], references: [id])
+  Sensor       Sensor?   @relation(fields: [sensorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   sensorId     Int?      @unique
 }
